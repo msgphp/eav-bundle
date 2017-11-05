@@ -27,7 +27,7 @@ final class Extension extends BaseExtension
 {
     public function getAlias(): string
     {
-        return 'msgphp_user';
+        return 'msgphp_eav';
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
