@@ -15,6 +15,7 @@ use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension as BaseExtension;
@@ -25,9 +26,11 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
  */
 final class Extension extends BaseExtension
 {
+    public const ALIAS = 'msgphp_eav';
+
     public function getAlias(): string
     {
-        return 'msgphp_eav';
+        return self::ALIAS;
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
@@ -49,21 +52,23 @@ final class Extension extends BaseExtension
         ]);
 
         if (isset($bundles[DoctrineBundle::class])) {
-            $loader->load('doctrine.php');
+            $this->prepareDoctrineBundle($config, $loader, $container);
+        }
+    }
 
-            foreach ([
-                AttributeRepository::class => $classMapping[Attribute::class],
-            ] as $repository => $class) {
-                if (null === $class) {
-                    $container->removeDefinition($repository);
-                    foreach ($container->getAliases() as $id => $alias) {
-                        if ((string) $alias === $repository) {
-                            $container->removeAlias($id);
-                        }
-                    }
-                } else {
-                    $container->getDefinition($repository)->setArgument('$class', $class);
-                }
+    private function prepareDoctrineBundle(array $config, LoaderInterface $loader, ContainerBuilder $container): void
+    {
+        $loader->load('doctrine.php');
+
+        $classMapping = $config['class_mapping'];
+
+        foreach ([
+            AttributeRepository::class => $classMapping[Attribute::class],
+        ] as $repository => $class) {
+            if (null === $class) {
+                $container->removeDefinition($repository);
+            } else {
+                $container->getDefinition($repository)->setArgument('$class', $class);
             }
         }
     }
