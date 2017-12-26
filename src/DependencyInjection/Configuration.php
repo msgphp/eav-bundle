@@ -28,11 +28,15 @@ final class Configuration implements ConfigurationInterface
                         ->cannotBeEmpty()
                     ->end()
                     ->validate()
-                        ->ifTrue(function (array $value) { return !isset($value[Attribute::class]); })
+                        ->ifTrue(function (array $value) {
+                            return !isset($value[Attribute::class]);
+                        })
                         ->thenInvalid(sprintf('Class "%s" must be configured', Attribute::class))
                     ->end()
                     ->validate()
-                        ->ifTrue(function (array $value) { return !isset($value[AttributeValue::class]); })
+                        ->ifTrue(function (array $value) {
+                            return !isset($value[AttributeValue::class]);
+                        })
                         ->thenInvalid(sprintf('Class "%s" must be configured', AttributeValue::class))
                     ->end()
                     ->validate()

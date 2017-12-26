@@ -9,14 +9,9 @@ use MsgPhp\Domain\Infra\Bundle\ServiceConfigHelper;
 use MsgPhp\Eav\{AttributeIdInterface, AttributeValueIdInterface};
 use MsgPhp\Eav\Entity\{Attribute, AttributeValue};
 use MsgPhp\Eav\Infra\Doctrine\Repository\AttributeRepository;
-use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
-use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
-use Symfony\Bundle\SecurityBundle\SecurityBundle;
-use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension as BaseExtension;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
@@ -38,7 +33,7 @@ final class Extension extends BaseExtension
         return new Configuration();
     }
 
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
         $classMapping = $config['class_mapping'];
