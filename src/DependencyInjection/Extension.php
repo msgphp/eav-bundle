@@ -63,7 +63,7 @@ final class Extension extends BaseExtension
         $classMapping = $config['class_mapping'];
 
         foreach ([
-            AttributeRepository::class => $classMapping[Attribute::class],
+            AttributeRepository::class => $classMapping[Attribute::class] ?? null,
         ] as $repository => $class) {
             if (null === $class) {
                 $container->removeDefinition($repository);
