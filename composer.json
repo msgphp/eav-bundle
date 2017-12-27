@@ -21,6 +21,9 @@
         "symfony/dependency-injection": "^3.4|^4.0",
         "symfony/http-kernel": "^3.4|^4.0"
     },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^1.8"
+    },
     "config": {
         "preferred-install": {
             "*": "dist"
