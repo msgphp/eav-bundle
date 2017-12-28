@@ -38,6 +38,11 @@ final class Extension extends BaseExtension
         $config = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
         $classMapping = $config['class_mapping'];
 
+        if (!$classMapping) {
+            // un-configured bundle
+            return;
+        }
+
         $loader = new PhpFileLoader($container, new FileLocator(dirname(__DIR__).'/Resources/config'));
         $bundles = array_flip($container->getParameter('kernel.bundles'));
 
@@ -58,7 +63,7 @@ final class Extension extends BaseExtension
         $classMapping = $config['class_mapping'];
 
         foreach ([
-            AttributeRepository::class => $classMapping[Attribute::class] ?? null,
+            AttributeRepository::class => $classMapping[Attribute::class],
         ] as $repository => $class) {
             if (null === $class) {
                 $container->removeDefinition($repository);
