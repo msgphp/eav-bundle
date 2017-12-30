@@ -1,6 +1,6 @@
-# MsgPhp EAV Bundle
+# Entity-Attribute-Value Bundle
 
-A Symfony bundle for basic entity-attribute-values.
+A Symfony bundle for basic EAV management.
 
 ## Installation
 
@@ -28,3 +28,7 @@ return function (ContainerConfigurator $container) {
 ```
 
 And be done.
+
+## Contributing
+
+This repository is **READ ONLY**. Issues and pull requests should be submitted in the [main development repository](https://github.com/msgphp/msgphp).
