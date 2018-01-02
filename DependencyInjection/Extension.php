@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MsgPhp\EavBundle\DependencyInjection;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use MsgPhp\Domain\Infra\DependencyInjection\BundleServiceConfigHelper;
+use MsgPhp\Domain\Infra\DependencyInjection\Bundle\ContainerHelper;
 use MsgPhp\Domain\Infra\Doctrine\Mapping\EntityFields as BaseEntityFields;
 use MsgPhp\Domain\Infra\Uuid\DomainId;
 use MsgPhp\Eav\{AttributeIdInterface, AttributeValueIdInterface};
@@ -42,16 +42,16 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
     {
         $loader = new PhpFileLoader($container, new FileLocator(dirname(__DIR__).'/Resources/config'));
         $config = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
-        $bundles = array_flip($container->getParameter('kernel.bundles'));
+        $bundles = ContainerHelper::getBundles($container);
         $classMapping = $config['class_mapping'];
 
-        BundleServiceConfigHelper::configureEntityFactory($container, $classMapping, [
+        ContainerHelper::configureEntityFactory($container, $classMapping, [
             Attribute::class => AttributeIdInterface::class,
             AttributeValue::class => AttributeValueIdInterface::class,
         ]);
 
         if (isset($bundles[DoctrineBundle::class])) {
-            BundleServiceConfigHelper::configureDoctrineObjectFieldMapping($container, BaseEntityFields::class);
+            ContainerHelper::configureDoctrineObjectFieldMapping($container, BaseEntityFields::class);
 
             $this->prepareDoctrineBundle($config, $loader, $container);
         }
@@ -60,7 +60,7 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
     public function prepend(ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration($configs = $container->getExtensionConfig($this->getAlias()), $container), $configs);
-        $bundles = array_flip($container->getParameter('kernel.bundles'));
+        $bundles = ContainerHelper::getBundles($container);
         $classMapping = $config['class_mapping'];
 
         if (isset($bundles[DoctrineBundle::class])) {
