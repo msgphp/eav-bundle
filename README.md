@@ -29,6 +29,14 @@ return function (ContainerConfigurator $container) {
 
 And be done.
 
+## Usage
+
+### With `DoctrineBundle`
+
+Repositories from `MsgPhp\Eav\Infra\Doctrine\Repository\*` are registered as a service. Corresponding domain interfaces
+from `MsgPhp\Eav\Repository\*` are aliased.
+
 ## Contributing
 
-This repository is **READ ONLY**. Issues and pull requests should be submitted in the [main development repository](https://github.com/msgphp/msgphp).
+This repository is **READ ONLY**. Issues and pull requests should be submitted in the
+[main development repository](https://github.com/msgphp/msgphp).
