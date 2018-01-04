@@ -11,7 +11,7 @@ return function (ContainerConfigurator $container): void {
         ->defaults()
             ->autowire()
             ->private()
-        ->load('MsgPhp\\Eav\\Infra\\Doctrine\\Repository\\', '%kernel.project_dir%/vendor/msgphp/eav/Infra/Doctrine/Repository')
+        ->load('MsgPhp\\Eav\\Infra\\Doctrine\\Repository\\', '%kernel.project_dir%/vendor/msgphp/eav/Infra/Doctrine/Repository/*Repository.php')
         ->alias(AttributeRepositoryInterface::class, AttributeRepository::class)
     ;
 };
