@@ -31,10 +31,24 @@ And be done.
 
 ## Usage
 
-### With `DoctrineBundle`
+### With `DoctrineBundle` + `doctrine/orm`
 
 Repositories from `MsgPhp\Eav\Infra\Doctrine\Repository\*` are registered as a service. Corresponding domain interfaces
-from `MsgPhp\Eav\Repository\*` are aliased.
+from  `MsgPhp\Eav\Repository\*` are aliased.
+
+Minimal configuration:
+
+```yaml
+# config/packages/doctrine.yaml
+
+doctrine:
+    orm:
+        mappings:
+            app:
+                dir: '%kernel.project_dir%/src/Entity'
+                type: annotation
+                prefix: App\Entity
+```
 
 ## Contributing
 
