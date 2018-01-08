@@ -1,5 +1,3 @@
-<p align="center"><a href="https://msgphp.github.io/"><img src="https://raw.githubusercontent.com/msgphp/msgphp.github.io/master/assets/love_is_med.png" alt="Love is…"></a></p>
-
 # Entity-Attribute-Value Bundle
 
 A Symfony bundle for basic EAV management.
