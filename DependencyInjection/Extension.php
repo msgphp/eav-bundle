@@ -46,7 +46,7 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
 
         ContainerHelper::configureIdentityMap($container, $config['class_mapping'], Configuration::IDENTITY_MAP);
         ContainerHelper::configureEntityFactory($container, $config['class_mapping'], Configuration::AGGREGATE_ROOTS);
-        ContainerHelper::configureDoctrineOrm($container, self::getDoctrineMappingFiles($container), [EntityFieldsMapping::class]);
+        ContainerHelper::configureDoctrineOrmMapping($container, self::getDoctrineMappingFiles($container), [EntityFieldsMapping::class]);
 
         $bundles = ContainerHelper::getBundles($container);
 
@@ -67,7 +67,7 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
             AttributeIdInterface::class => AttributeIdType::class,
             AttributeValueIdInterface::class => AttributeValueIdType::class,
         ]);
-        ContainerHelper::configureDoctrineMapping($container, $config['class_mapping']);
+        ContainerHelper::configureDoctrineOrmTargetEntities($container, $config['class_mapping']);
     }
 
     private function prepareDoctrineBundle(array $config, LoaderInterface $loader, ContainerBuilder $container): void
@@ -85,9 +85,11 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
         ] as $repository => $class) {
             if (null === $class) {
                 $container->removeDefinition($repository);
-            } else {
-                $container->getDefinition($repository)->setArgument('$class', $class);
+                continue;
             }
+
+            $container->getDefinition($repository)
+                ->setArgument('$class', $class);
         }
     }
 
