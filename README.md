@@ -11,6 +11,7 @@ composer require msgphp/eav-bundle
 ## Features
 
 - Symfony 3.4 / 4.0 ready
+- Doctrine persistence
 
 ## Configuration
 
@@ -35,12 +36,12 @@ And be done.
 
 ## Usage
 
-### With `DoctrineBundle` + `doctrine/orm`
+### With `doctrine/orm`
 
 Repositories from `MsgPhp\Eav\Infra\Doctrine\Repository\*` are registered as a service. Corresponding domain interfaces
 from  `MsgPhp\Eav\Repository\*` are aliased.
 
-Minimal configuration:
+Minimal `DoctrineBundle` configuration:
 
 ```yaml
 # config/packages/doctrine.yaml
