@@ -37,12 +37,12 @@ And be done.
 
 ## Usage
 
-### With `doctrine/orm`
+### With [`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle)
 
 Repositories from `MsgPhp\Eav\Infra\Doctrine\Repository\*` are registered as a service. Corresponding domain interfaces
 from  `MsgPhp\Eav\Repository\*` are aliased.
 
-Minimal `DoctrineBundle` configuration:
+Minimal configuration:
 
 ```yaml
 # config/packages/doctrine.yaml
@@ -55,6 +55,8 @@ doctrine:
                 type: annotation
                 prefix: App\Entity
 ```
+
+- Requires `doctrine/orm`
 
 ## Documentation
 

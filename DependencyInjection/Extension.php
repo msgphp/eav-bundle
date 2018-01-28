@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MsgPhp\EavBundle\DependencyInjection;
 
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\ORM\Version as DoctrineOrmVersion;
 use MsgPhp\Domain\Infra\DependencyInjection\Bundle\{ConfigHelper, ContainerHelper};
 use MsgPhp\Eav\{AttributeIdInterface, AttributeValueIdInterface, Entity};
@@ -46,7 +47,7 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
         ContainerHelper::configureDoctrineOrmMapping($container, self::getDoctrineMappingFiles($config, $container), [DoctrineInfra\EntityFieldsMapping::class]);
 
         // persistence infra
-        if (class_exists(DoctrineOrmVersion::class)) {
+        if (class_exists(DoctrineOrmVersion::class) && ContainerHelper::hasBundle($container, DoctrineBundle::class)) {
             $this->prepareDoctrineOrm($config, $loader, $container);
         }
     }
