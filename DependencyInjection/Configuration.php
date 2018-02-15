@@ -45,12 +45,12 @@ final class Configuration implements ConfigurationInterface
 
         $treeBuilder->root(Extension::ALIAS)
             ->append(
-                ConfigHelper::createClassMappingNode('class_mapping', $requiredEntities, $entities, function (array $value) use ($ids): array {
+                ConfigHelper::createClassMappingNode('class_mapping', $requiredEntities, $entities, true, function (array $value) use ($ids): array {
                     return $value + array_fill_keys($ids, null);
                 })
             )
             ->append(
-                ConfigHelper::createClassMappingNode('data_type_mapping', [], [], function ($value) use ($ids): array {
+                ConfigHelper::createClassMappingNode('data_type_mapping', [], [], false, function ($value) use ($ids): array {
                     if (!is_array($value)) {
                         $value = array_fill_keys($ids, $value);
                     } else {
