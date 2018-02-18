@@ -7,7 +7,6 @@ namespace MsgPhp;
 use MsgPhp\Domain\Infra\DependencyInjection\Bundle\ContainerHelper;
 use MsgPhp\Eav\AttributeIdInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 /** @var ContainerBuilder $container */
@@ -25,12 +24,8 @@ return function (ContainerConfigurator $container) use ($reflector): void {
     ;
 
     foreach (glob($repositories) as $file) {
-        foreach ($reflector($repository = $ns.basename($file, '.php'))->getInterfaces() as $interface) {
-            try {
-                $services->get($interface = $interface->getName());
-            } catch (ServiceNotFoundException $e) {
-                $services->alias($interface, $repository);
-            }
+        foreach ($reflector($repository = $ns.basename($file, '.php'))->getInterfaceNames() as $interface) {
+            $services->alias($interface, $repository);
         }
     }
 };
