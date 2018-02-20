@@ -1,6 +1,6 @@
-# Entity-Attribute-Value Bundle
+# Entity-Attribute-Value bundle
 
-A Symfony bundle for basic EAV management.
+A Symfony bundle for basic [EAV](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) management.
 
 This package is part of the _Message driven PHP_ project.
 
