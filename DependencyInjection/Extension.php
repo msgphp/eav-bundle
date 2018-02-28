@@ -6,7 +6,7 @@ namespace MsgPhp\EavBundle\DependencyInjection;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\ORM\Version as DoctrineOrmVersion;
-use MsgPhp\Domain\Infra\DependencyInjection\{ConfigHelper, ContainerHelper};
+use MsgPhp\Domain\Infra\DependencyInjection\ContainerHelper;
 use MsgPhp\Eav\{AttributeIdInterface, AttributeValueIdInterface, Entity};
 use MsgPhp\Eav\Infra\Doctrine as DoctrineInfra;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -39,9 +39,6 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
         $loader = new PhpFileLoader($container, new FileLocator(dirname(__DIR__).'/Resources/config'));
         $config = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
 
-        ConfigHelper::resolveResolveDataTypeMapping($container, $config['data_type_mapping']);
-        ConfigHelper::resolveClassMapping(Configuration::DATA_TYPE_MAPPING, $config['data_type_mapping'], $config['class_mapping']);
-
         ContainerHelper::configureIdentityMapping($container, $config['class_mapping'], Configuration::IDENTITY_MAPPING);
         ContainerHelper::configureEntityFactory($container, $config['class_mapping'], Configuration::AGGREGATE_ROOTS);
         ContainerHelper::configureDoctrineOrmMapping($container, self::getDoctrineMappingFiles($config, $container), [DoctrineInfra\EntityFieldsMapping::class]);
@@ -56,10 +53,7 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
     {
         $config = $this->processConfiguration($this->getConfiguration($configs = $container->getExtensionConfig($this->getAlias()), $container), $configs);
 
-        ConfigHelper::resolveResolveDataTypeMapping($container, $config['data_type_mapping']);
-        ConfigHelper::resolveClassMapping(Configuration::DATA_TYPE_MAPPING, $config['data_type_mapping'], $config['class_mapping']);
-
-        ContainerHelper::configureDoctrineTypes($container, $config['data_type_mapping'], $config['class_mapping'], [
+        ContainerHelper::configureDoctrineTypes($container, $config['class_mapping'], $config['id_type_mapping'], [
             AttributeIdInterface::class => DoctrineInfra\Type\AttributeIdType::class,
             AttributeValueIdInterface::class => DoctrineInfra\Type\AttributeValueIdType::class,
         ]);
