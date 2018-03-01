@@ -2,6 +2,8 @@
 
 A Symfony bundle for basic [EAV](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) management.
 
+[![Latest Stable Version](https://poser.pugx.org/msgphp/eav-bundle/v/stable)](https://packagist.org/packages/msgphp/eav-bundle)
+
 This package is part of the _Message driven PHP_ project.
 
 > [MsgPHP](https://msgphp.github.io/) is a project that aims to provide (common) message based domain layers for your application. It has a low development time overhead and avoids being overly opinionated.
