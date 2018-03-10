@@ -19,6 +19,8 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 /**
  * @author Roland Franssen <franssen.roland@gmail.com>
+ *
+ * @internal
  */
 final class Extension extends BaseExtension implements PrependExtensionInterface
 {
