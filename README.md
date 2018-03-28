@@ -69,6 +69,7 @@ doctrine:
 - Read the [main documentation](https://msgphp.github.io/docs/)
 - Browse the [API documentation](https://msgphp.github.io/api/MsgPhp/EavBundle.html)
 - Try the Symfony [demo application](https://github.com/msgphp/symfony-demo-app)
+- Get support on [Symfony's Slack `#msgphp` channel](https://symfony.com/slack-invite) or [raise an issue](https://github.com/msgphp/msgphp/issues/new)
 
 ## Contributing
 
