@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MsgPhp\EavBundle\DependencyInjection;
 
-use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
 use Doctrine\ORM\Version as DoctrineOrmVersion;
 use MsgPhp\Domain\Infra\DependencyInjection\ContainerHelper;
 use MsgPhp\Eav\{AttributeIdInterface, AttributeValueIdInterface, Entity};
@@ -65,7 +64,6 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
 
     public function process(ContainerBuilder $container): void
     {
-        ContainerHelper::removeIf($container, !$container->has(DoctrineEntityManager::class), array_keys(self::getDoctrineRepositoryEntityMapping()));
     }
 
     private function loadDoctrineOrm(array $config, LoaderInterface $loader, ContainerBuilder $container): void
@@ -73,7 +71,9 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
         $loader->load('doctrine.php');
 
         ContainerHelper::configureDoctrineOrmMapping($container, self::getDoctrineMappingFiles($config, $container), [DoctrineInfra\EntityFieldsMapping::class]);
-        ContainerHelper::configureDoctrineOrmRepositories($container, $config['class_mapping'], self::getDoctrineRepositoryEntityMapping());
+        ContainerHelper::configureDoctrineOrmRepositories($container, $config['class_mapping'], [
+            DoctrineInfra\Repository\AttributeRepository::class => Entity\Attribute::class,
+        ]);
     }
 
     private static function getDoctrineMappingFiles(array $config, ContainerBuilder $container): array
@@ -81,12 +81,5 @@ final class Extension extends BaseExtension implements PrependExtensionInterface
         $baseDir = Configuration::getPackageDir().'/Infra/Doctrine/Resources/dist-mapping';
 
         return glob($baseDir.'/*.orm.xml');
-    }
-
-    private static function getDoctrineRepositoryEntityMapping(): array
-    {
-        return [
-            DoctrineInfra\Repository\AttributeRepository::class => Entity\Attribute::class,
-        ];
     }
 }
