@@ -1,4 +1,4 @@
-# Entity-Attribute-Value bundle
+# Entity-Attribute-Value Bundle
 
 A Symfony bundle for basic [EAV](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) management.
 
