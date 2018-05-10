@@ -8,7 +8,7 @@ use MsgPhp\Domain\DomainIdInterface;
 use MsgPhp\Domain\Infra\Config\{NodeBuilder, TreeBuilder};
 use MsgPhp\Domain\Infra\DependencyInjection\ConfigHelper;
 use MsgPhp\Eav\{AttributeId, AttributeIdInterface, AttributeValueId, AttributeValueIdInterface, Command, Entity};
-use MsgPhp\Eav\Infra\Uuid as UuidInfra;
+use MsgPhp\Eav\Infra\{Doctrine as DoctrineInfra, Uuid as UuidInfra};
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
@@ -34,6 +34,10 @@ final class Configuration implements ConfigurationInterface
         AttributeIdInterface::class => UuidInfra\AttributeId::class,
         AttributeValueIdInterface::class => UuidInfra\AttributeValueId::class,
     ];
+    public const DOCTRINE_TYPE_MAPPING = [
+        AttributeIdInterface::class => DoctrineInfra\Type\AttributeIdType::class,
+        AttributeValueIdInterface::class => DoctrineInfra\Type\AttributeValueIdType::class,
+    ];
     private const COMMAND_MAPPING = [
         Entity\Attribute::class => [
             Command\CreateAttributeCommand::class => true,
@@ -41,15 +45,11 @@ final class Configuration implements ConfigurationInterface
         ],
     ];
 
+    private static $packageDir;
+
     public static function getPackageDir(): string
     {
-        static $path;
-
-        if (null === $path) {
-            $path = dirname((new \ReflectionClass(AttributeIdInterface::class))->getFileName());
-        }
-
-        return $path;
+        return self::$packageDir ?? (self::$packageDir = dirname((new \ReflectionClass(AttributeIdInterface::class))->getFileName()));
     }
 
     public function getConfigTreeBuilder(): TreeBuilder
