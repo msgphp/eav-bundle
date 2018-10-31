@@ -26,14 +26,6 @@ final class Configuration implements ConfigurationInterface
         Entity\Attribute::class => ['id'],
         Entity\AttributeValue::class => ['id'],
     ];
-    public const DEFAULT_ID_CLASS_MAPPING = [
-        AttributeIdInterface::class => AttributeId::class,
-        AttributeValueIdInterface::class => AttributeValueId::class,
-    ];
-    public const UUID_CLASS_MAPPING = [
-        AttributeIdInterface::class => UuidInfra\AttributeId::class,
-        AttributeValueIdInterface::class => UuidInfra\AttributeValueId::class,
-    ];
     public const DOCTRINE_TYPE_MAPPING = [
         AttributeIdInterface::class => DoctrineInfra\Type\AttributeIdType::class,
         AttributeValueIdInterface::class => DoctrineInfra\Type\AttributeValueIdType::class,
@@ -41,7 +33,14 @@ final class Configuration implements ConfigurationInterface
     public const DOCTRINE_REPOSITORY_MAPPING = [
         Entity\Attribute::class => DoctrineInfra\Repository\AttributeRepository::class,
     ];
-    public const CONSOLE_COMMAND_MAPPING = [];
+    private const DEFAULT_ID_MAPPING = [
+        AttributeIdInterface::class => AttributeId::class,
+        AttributeValueIdInterface::class => AttributeValueId::class,
+    ];
+    private const UUID_MAPPING = [
+        AttributeIdInterface::class => UuidInfra\AttributeId::class,
+        AttributeValueIdInterface::class => UuidInfra\AttributeValueId::class,
+    ];
     private const COMMAND_MAPPING = [
         Entity\Attribute::class => [
             Command\CreateAttributeCommand::class => true,
@@ -79,8 +78,8 @@ final class Configuration implements ConfigurationInterface
         ->end()
         ->validate()
             ->always(ConfigHelper::defaultBundleConfig(
-                self::DEFAULT_ID_CLASS_MAPPING,
-                array_fill_keys(ConfigHelper::UUID_TYPES, self::UUID_CLASS_MAPPING)
+                self::DEFAULT_ID_MAPPING,
+                array_fill_keys(ConfigHelper::UUID_TYPES, self::UUID_MAPPING)
             ))
         ->end()
         ->validate()
