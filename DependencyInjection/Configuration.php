@@ -18,6 +18,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 final class Configuration implements ConfigurationInterface
 {
+    public const PACKAGE_NS = 'MsgPhp\\Eav\\';
     public const AGGREGATE_ROOTS = [
         Entity\Attribute::class => AttributeIdInterface::class,
         Entity\AttributeValue::class => AttributeValueIdInterface::class,
@@ -48,11 +49,27 @@ final class Configuration implements ConfigurationInterface
         ],
     ];
 
-    private static $packageDir;
+    private static $packageDirs;
 
-    public static function getPackageDir(): string
+    /**
+     * @return string[]
+     */
+    public static function getPackageDirs(): array
     {
-        return self::$packageDir ?? (self::$packageDir = \dirname((string) (new \ReflectionClass(AttributeIdInterface::class))->getFileName()));
+        if (null !== self::$packageDirs) {
+            return self::$packageDirs;
+        }
+
+        return self::$packageDirs = [
+            \dirname((string) (new \ReflectionClass(AttributeIdInterface::class))->getFileName()),
+        ];
+    }
+
+    public static function getPackageGlob(): string
+    {
+        $dirs = self::getPackageDirs();
+
+        return isset($dirs[1]) ? '{'.implode(',', $dirs).'}' : $dirs[0];
     }
 
     public function getConfigTreeBuilder(): TreeBuilder
