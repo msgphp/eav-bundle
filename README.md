@@ -14,13 +14,6 @@ This package is part of the _Message driven PHP_ project.
 composer require msgphp/eav-bundle
 ```
 
-## Features
-
-- Symfony 3.4 / 4.0 ready
-- Symfony messenger commands & events
-- Doctrine persistence
-- Default attribute value types: `bool`, `int`, `float`, `string`, `\DateTimeInterface` and `null`
-
 ## Configuration
 
 ```php
