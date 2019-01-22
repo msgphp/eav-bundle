@@ -46,6 +46,9 @@ final class Configuration implements ConfigurationInterface
         ],
     ];
 
+    /**
+     * @var PackageMetadata|null
+     */
     private static $packageMetadata;
 
     public static function getPackageMetadata(): PackageMetadata
