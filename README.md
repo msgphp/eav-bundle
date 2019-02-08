@@ -2,7 +2,7 @@
 
 A Symfony bundle for basic [EAV](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) management.
 
-[![Latest Stable Version](https://poser.pugx.org/msgphp/eav-bundle/v/stable)](https://packagist.org/packages/msgphp/eav-bundle)
+[![Latest Stable Version][packagist:img]][packagist]
 
 ## Installation
 
@@ -39,3 +39,6 @@ return function (ContainerConfigurator $container) {
 
 This repository is **READ ONLY**. Issues and pull requests should be submitted in the
 [main development repository](https://github.com/msgphp/msgphp).
+
+[packagist]: https://packagist.org/packages/msgphp/domain
+[packagist:img]: https://img.shields.io/packagist/v/msgphp/domain.svg?style=flat-square
