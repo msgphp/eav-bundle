@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace MsgPhp\EavBundle\DependencyInjection\Compiler;
 
 use MsgPhp\Domain\Infra\DependencyInjection\ContainerHelper;
-use MsgPhp\Eav\{Command, Repository};
+use MsgPhp\Eav\Command;
+use MsgPhp\Eav\Repository;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

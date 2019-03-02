@@ -5,10 +5,18 @@ declare(strict_types=1);
 namespace MsgPhp\EavBundle\DependencyInjection;
 
 use MsgPhp\Domain\DomainIdInterface;
-use MsgPhp\Domain\Infra\Config\{NodeBuilder, TreeBuilderHelper};
-use MsgPhp\Domain\Infra\DependencyInjection\{ConfigHelper, PackageMetadata};
-use MsgPhp\Eav\{ScalarAttributeId, AttributeIdInterface, ScalarAttributeValueId, AttributeValueIdInterface, Command, Entity};
-use MsgPhp\Eav\Infra\{Doctrine as DoctrineInfra, Uuid as UuidInfra};
+use MsgPhp\Domain\Infra\Config\NodeBuilder;
+use MsgPhp\Domain\Infra\Config\TreeBuilderHelper;
+use MsgPhp\Domain\Infra\DependencyInjection\ConfigHelper;
+use MsgPhp\Domain\Infra\DependencyInjection\PackageMetadata;
+use MsgPhp\Eav\AttributeIdInterface;
+use MsgPhp\Eav\AttributeValueIdInterface;
+use MsgPhp\Eav\Command;
+use MsgPhp\Eav\Entity;
+use MsgPhp\Eav\Infra\Doctrine as DoctrineInfra;
+use MsgPhp\Eav\Infra\Uuid as UuidInfra;
+use MsgPhp\Eav\ScalarAttributeId;
+use MsgPhp\Eav\ScalarAttributeValueId;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
