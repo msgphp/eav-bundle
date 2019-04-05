@@ -94,7 +94,7 @@ final class Configuration implements ConfigurationInterface
             ->always(ConfigHelper::defaultBundleConfig(self::ID_TYPE_MAPPING))
         ->end()
         ->validate()
-            ->always(function (array $config): array {
+            ->always(static function (array $config): array {
                 ConfigHelper::resolveCommandMappingConfig(self::COMMAND_MAPPING, $config['class_mapping'], $config['commands']);
 
                 return $config;
