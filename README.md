@@ -23,8 +23,8 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return function (ContainerConfigurator $container) {
     $container->extension('msgphp_eav', [
         'class_mapping' => [
-            Attribute::class => \App\Entity\Eav\Attribute::class,
-            AttributeValue::class => \App\Entity\Eav\AttributeValue::class,
+            Attribute::class => \App\Entity\Attribute::class,
+            AttributeValue::class => \App\Entity\AttributeValue::class,
         ],
     ]);
 };
