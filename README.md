@@ -1,3 +1,11 @@
+# NOT ACTIVELY SUPPORTED ANY MORE!!
+
+msgphp/* repositories are not actively developed/supported anymore.
+
+**Use in production on your own risks.**
+
+If you want to do some hotfixes - please do PR directly in target repository instead of previous msgphp/msgphp  monorepository
+
 # Entity-Attribute-Value Bundle
 
 A Symfony bundle for basic [EAV](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) management.
@@ -37,9 +45,6 @@ return function (ContainerConfigurator $container) {
 - Get support on [Symfony's Slack `#msgphp` channel](https://symfony.com/slack-invite) or [raise an issue](https://github.com/msgphp/msgphp/issues/new)
 
 # Contributing
-
-This repository is **READ ONLY**. Issues and pull requests should be submitted in the
-[main development repository](https://github.com/msgphp/msgphp).
 
 [packagist]: https://packagist.org/packages/msgphp/eav-bundle
 [packagist:img]: https://img.shields.io/packagist/v/msgphp/eav-bundle.svg?style=flat-square
